@@ -67,8 +67,13 @@ then
 	exit 1
 fi
 
-gsettings set "org.gnome.desktop.background" picture-options "zoom"
-gsettings set "org.gnome.desktop.background" picture-uri "'file://$imagePath'"
+echo $imagePath
+
+# does not work on mate (no such schema)
+# gsettings set "org.mate.desktop.background" picture-options "zoom"
+# gsettings set "org.mate.desktop.background" picture-filename "$imagePath"
+dconf write /org/mate/desktop/background/picture-options "'zoom'"
+dconf write /org/mate/desktop/background/picture-filename "'$imagePath'"
 
 mkdir -p "$spotlightPath"
 
